@@ -31,3 +31,22 @@ make_face_df_save(test_photo,2035,df)
 #face_shape = find_face_shape(df,2035)
 #print(face_shape)
 #return all files with the same face shape
+client = MongoClient('mongodb:///')
+
+# Get the 'test' database
+db = client['test']
+
+# Change to whatever the function returns
+collection = db['data']
+
+# Find all documents
+docs = collection.find()
+
+# Convert the documents to a list
+docs = list(docs)
+
+# Serialize the documents to JSON
+json_data = json.dumps(docs)
+
+# Return the JSON data
+print(json_data)
