@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const BasicStyles = StyleSheet.create({
+    container1: {
+        width: '100%',
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     textField: {
         backgroundColor: '#6E80E1',
         padding: 10,
@@ -46,8 +53,41 @@ const BasicStyles = StyleSheet.create({
         marginTop: 30,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    camera: {
+        flex: 1,
+        width: '100%',
+        // borderRadius: 30,
+    },
+    buttonText: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#f1f1f1',
+        marginLeft: 10,
+    },
+    buttonButton: {
+        backgroundColor: '#6E80E1',
+        height: 50,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        borderRadius: 30,
+        marginBottom: 20,
+        marginHorizontal: 50,
+    },
+    smallButton: {
+        color: '#fff',
+        backgroundColor: '#6E80E1',
+        height: 50,
+        borderRadius: 50,
+        width: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginHorizontal: 20,
+        marginBottom: 20,
     }
-
   });
 
 export default BasicStyles;

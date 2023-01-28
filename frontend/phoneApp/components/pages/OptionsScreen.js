@@ -42,10 +42,10 @@ const OptionsScreen = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')} >
                     <Image source={require("../images/home.png")}></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
                     <Image source={require("../images/camera.png")}></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
                     <Image source={require("../images/notes.png")}></Image>
                 </TouchableOpacity>
             </View>
