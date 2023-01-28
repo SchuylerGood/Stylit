@@ -32,8 +32,8 @@ export default function App() {
         <Stack.Screen name="SavedScreen" component={SavedScreen} />
         <Stack.Screen name="ShareScreen" component={ShareScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="OptionsScreen" component={CameraScreen} />
-        <Stack.Screen name="CameraScreen" component={OptionsScreen} />
+        <Stack.Screen name="CameraScreen" component={CameraScreen} />
+        <Stack.Screen name="OptionsScreen" component={OptionsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     
