@@ -19,9 +19,6 @@ from sklearn.decomposition import PCA
 
 
 image_dir = "data/pics"   #celebrity search version
-
-
-
 def distance(p1,p2):
     dx = p2[0] - p1[0]
     dy = p2[1] - p1[1]
@@ -45,7 +42,6 @@ def scale_rotate_translate(image, angle, center = None, new_center = None, scale
     e = cosine/sy
     f = y-nx*d-ny*e
     return image.transform(image.size, Image.AFFINE, (a,b,c,d,e,f), resample=resample)
-
 def crop_face(image, eye_left=(0,0), eye_right=(0,0), offset_pct=(0.3,0.3), dest_sz = (600,600)):
     # calculate offsets in original image
     offset_h = math.floor(float(offset_pct[0])*dest_sz[0])
@@ -70,7 +66,6 @@ def crop_face(image, eye_left=(0,0), eye_right=(0,0), offset_pct=(0.3,0.3), dest
     # resize it
     image = image.resize(dest_sz, Image.ANTIALIAS)
     return image
-
 def make_face_df_save(image_select,filenum,df):
     
     # This function looks at one image, draws points and saves points to DF
@@ -237,68 +232,5 @@ def make_face_df_save(image_select,filenum,df):
         
         ### end of new ###
         df.loc[filenum] = np.array(pts)
-       
-        #imshow(pil_image, cmap='gray')
-            
-def find_face_shape(df,file_num):
-    data = pd.read_csv('all_features.csv',index_col = None)
-    data = data.drop('Unnamed: 0',axis = 1)
 
-    data_clean = data.dropna(axis=0, how='any')
-    X = data_clean
-    X = X.drop(['filenum','filename','classified_shape'] , axis = 1)
-    X_norm = normalize(X)
-    Y = data_clean['classified_shape']
-
-    scaler = StandardScaler()  
-    scaler.fit(X)  
-
-    X = scaler.transform(X)
-
-    ### Split into train/test sets
-
-    X_train, X_test, Y_train, Y_test = train_test_split(
-        X,Y,
-        test_size=0.25,
-        random_state=1200)
-
-    ### Apply PCA for dimension reduction
-
-    n_components = 18
-    pca = PCA(n_components=n_components, svd_solver='randomized',
-              whiten=True).fit(X)
-
-    X_train_pca = pca.transform(X_train)
-    X_test_pca = pca.transform(X_test)
-
-    # #Remove PCA 
-    X_train_pca = X_train
-    X_test_pca = X_test
-
-    ## Neural Network (MLP)
-
-    from sklearn.neural_network import MLPClassifier
-
-    # With best model tuning
-
-    best_mlp = MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-           beta_2=0.999, early_stopping=False, epsilon=1e-08,
-           hidden_layer_sizes=(60, 100, 30, 100), learning_rate='constant',
-           learning_rate_init=0.01, max_iter=100, momentum=0.9,
-           nesterovs_momentum=True, power_t=0.5, random_state=525,
-           shuffle=True, solver='sgd', tol=0.0001, validation_fraction=0.1,
-           verbose=False, warm_start=False)
-    best_mlp.fit(X_train_pca, Y_train)
-
-    mlp_score = best_mlp.score(X_test_pca,Y_test)
-
-    y_pred = best_mlp.predict(X_test_pca)
-
-    mlp_crosstab = pd.crosstab(Y_test, y_pred, margins=True)
-
-    print(file_num)
-     
-    test_row = df.iloc[file_num].values.reshape(1,-1)
-    test_row = scaler.transform(test_row)  
-    test_shape = best_mlp.predict(test_row)
-    return test_shape
+        
