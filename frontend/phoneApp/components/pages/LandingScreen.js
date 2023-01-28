@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Button, PermissionsAndroid } from 'react-native';
-
+import { StyleSheet, Text, View, Image,  Button, TouchableOpacity } from 'react-native';
+import Arrow from "../images/WhiteArrow.png";
 
 const LogInScreen = ({ navigation }) => {
     return (
@@ -18,15 +18,21 @@ const LogInScreen = ({ navigation }) => {
             paddingHorizontal: 20
         }}
         
-        >Finding your next great haristyle</Text>
-        <Button
-          title=" GO TO THE LOG IN "
-          onPress={() => navigation.navigate('LogInScreen')}
-          style={{
-            backgroundColor: '#fff',
-            color: '#fff',
-          }}
-        />
+        >
+            Finding your next great haristyle
+        </Text>
+        <TouchableOpacity
+            style={{
+                // backgroundColor: '#fff',
+                padding: 10,
+                paddingHorizontal: 20,
+                borderRadius: 10,
+                marginTop: 20
+            }} 
+            onPress={() => navigation.navigate('LogInScreen')}
+        >
+            <Image source={require('../images/WhiteArrow.png')}></Image>
+        </TouchableOpacity>
       </View>
     );
   }
