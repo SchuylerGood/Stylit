@@ -78,8 +78,10 @@ def make_face_df_save(image_select,filenum,df):
    # filenum = 0   # need this to iterate through the dataframe to append rows
     face = 0
     image = face_recognition.load_image_file(image_select)
+    print(image)
     face_landmarks_list = face_recognition.face_landmarks(image)
     
+    print(face_landmarks_list)
     for face_landmarks in face_landmarks_list:
         face += 1
         if face >1:    # this will only measure one face per image
@@ -234,8 +236,8 @@ def make_face_df_save(image_select,filenum,df):
         pts.append(mid_jaw_width_to_jaw_width)
         
         ### end of new ###
-            
         df.loc[filenum] = np.array(pts)
+       
         #imshow(pil_image, cmap='gray')
             
 def find_face_shape(df,file_num):
@@ -293,8 +295,10 @@ def find_face_shape(df,file_num):
     y_pred = best_mlp.predict(X_test_pca)
 
     mlp_crosstab = pd.crosstab(Y_test, y_pred, margins=True)
-    
-    test_row = df.ix[file_num].values.reshape(1,-1)
+
+    print(file_num)
+     
+    test_row = df.iloc[file_num].values.reshape(1,-1)
     test_row = scaler.transform(test_row)  
     test_shape = best_mlp.predict(test_row)
     return test_shape
