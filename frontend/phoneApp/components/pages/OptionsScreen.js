@@ -1,5 +1,7 @@
 import { StyleSheet, Text, TextInput, View, Image,  Button, TouchableOpacity } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 const OptionsScreen = ({ navigation }) => {
     return (
@@ -11,43 +13,40 @@ const OptionsScreen = ({ navigation }) => {
         }}>
             <View style={{
                 flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
+                // alignItems: 'center',
                 width: '100%',
-                backgroundColor: '#fff'
+                backgroundColor: '#f1f1f1',
+                flexDirection: 'column'
             }}>
-                <Text style={{
-                    color: '#8E8E8E',
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    marginHorizontal: 100,
-                    textAlign: 'center',
-                }}>
-                    This is where the infinite scroll demo will go 
-                </Text>
-            </View>
-            <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    padding: 20,
-                    backgroundColor: '#2A4ED0'
-            }}>
-                <TouchableOpacity onPress={() => navigation.navigate('SavedScreen')}>
-                    <Image source={require("../images/files.png")} ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ShareScreen')}>
-                    <Image source={require("../images/telegram.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')} >
-                    <Image source={require("../images/home.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
-                    <Image source={require("../images/camera.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
-                    <Image source={require("../images/notes.png")}></Image>
-                </TouchableOpacity>
+                <View style={{borderBottomWidth: 3, borderBottomColor: "#A0A0A0"}}>
+                    {/* This is the profile button */}
+                    <TouchableOpacity
+                    onPress={() => navigation.navigate('ProfileScreen')}
+                        style={{
+                            flexDirection: 'row',
+                            backgroundColor: '#fff',
+                            padding: 15,
+                        }}
+                        // onPress={() => navigation.navigate('ProfileScreen')}
+                    >
+                        <View>
+                            <Image source={require('../images/ProfilePic.png')} width={50} height={50} ></Image>
+                        </View>
+                        <View
+                            style={{ alignContent: 'center', justifyContent: 'center', marginLeft: 10 }}
+                        >
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Adam Johnson</Text>
+                            <Text style={{ fontSize:10 }}>manage account</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center', marginLeft: 20 }}>
+                            <Icon name="arrow-right" size={50} color="#000" />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity onPress={() => navigation.navigate('PrivacyOptions')} style={BasicStyles.profileSection}><Text>Privacy Options</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicies')} style={BasicStyles.profileSection}><Text>Privacy Policies</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ReportAProblem')} style={BasicStyles.profileSection}><Text>Report a problem</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Help')} style={BasicStyles.profileSection}><Text>Help</Text></TouchableOpacity>
             </View>
         </View>
     )

@@ -7,7 +7,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigation = useNavigation()
+  const navigation = useNavigation() // Update to different navigation on actual implementaiton
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {

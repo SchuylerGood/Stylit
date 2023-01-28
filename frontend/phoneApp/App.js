@@ -13,8 +13,16 @@ import PasswordSetupScreen from './components/pages/PasswordSetupScreen';
 import SavedScreen from './components/pages/SavedScreen';
 import ShareScreen from './components/pages/ShareScreen';
 import HomeScreen from './components/pages/HomeScreen';
-import OptionsScreen from './components/pages/OptionsScreen';
 import CameraScreen from './components/pages/CameraScreen';
+import OptionsScreen from './components/pages/OptionsScreen';
+
+
+// THIS ARE THE PROFILE MANAGEMENT SCREENS
+import ProfileScreen from './components/pages/ProfileScreen';
+import PrivacyOptions from './components/pages/PrivacyOptionsScreen';
+import PrivacyPolicies from './components/pages/PrivacyPoliciesScreen';
+import ReportAProblem from './components/pages/ReportAProblemScreen';
+import Help from './components/pages/HelpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,16 +32,24 @@ export default function App() {
       <Stack.Navigator>
         {/* THIS IS THE LOGIN/REGISTRATION SCREENS */}
         <Stack.Screen name="LandingScreen" component={LandingScreen} />
-        <Stack.Screen name="LogInScreen" component={LogInScreen} />
+        <Stack.Screen name="LogInScreen"          component={LogInScreen} options={{headerBackVisible:false}} />
         <Stack.Screen name="CreateAccountScreen" component={CreateAccountScreen} />
         <Stack.Screen name="PasswordSetupScreen" component={PasswordSetupScreen} />
 
         {/* THIS IS THE MAIN CONTENT SCREENS */}
-        <Stack.Screen name="SavedScreen" component={SavedScreen} />
-        <Stack.Screen name="ShareScreen" component={ShareScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="CameraScreen" component={CameraScreen} />
+        <Stack.Screen name="SavedScreen"   component={SavedScreen} options={{headerBackVisible:false}}/>
+        <Stack.Screen name="ShareScreen"   component={ShareScreen} options={{headerBackVisible:false}}/>
+        <Stack.Screen name="HomeScreen"    component={HomeScreen} options={{headerBackVisible:false}} />
+        <Stack.Screen name="CameraScreen"  component={CameraScreen} options={{headerBackVisible:false}}/>
         <Stack.Screen name="OptionsScreen" component={OptionsScreen} />
+
+        {/* THIS IS THE PROFILE MANAGEMENT SECTION */}
+        <Stack.Screen name="ProfileScreen"   component={ProfileScreen} />
+        <Stack.Screen name="PrivacyOptions"  component={PrivacyOptions} />
+        <Stack.Screen name="PrivacyPolicies" component={PrivacyPolicies} />
+        <Stack.Screen name="ReportAProblem"  component={ReportAProblem} />
+        <Stack.Screen name="Help"            component={Help} />
+
       </Stack.Navigator>
     </NavigationContainer>
     

@@ -15,7 +15,8 @@ const BasicStyles = StyleSheet.create({
         width: 280,
         marginTop: 8,
         borderWidth: 3,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        color: '#fff',
     },
     fieldText: {
         color: '#BFC7F2'
@@ -87,6 +88,21 @@ const BasicStyles = StyleSheet.create({
         flexDirection: 'row',
         marginHorizontal: 20,
         marginBottom: 20,
+    },
+    profileSection: {
+        borderBottomWidth: 3, 
+        borderBottomColor: "#A0A0A0",
+        height: 60,
+        justifyContent : 'center',
+        paddingLeft: 20,
+        alignContent: 'center',
+        backgroundColor: '#fff',
+    },
+    container2: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        // justifyContent: 'center',
     }
   });
 
