@@ -5,19 +5,16 @@ import { Camera, CameraType} from 'expo-camera';
 // import * as MediaLibrary from 'expo-media-library';
 import CameraButton from '../CameraButton';
 import * as ImagePicker from 'expo-image-picker';
+import { image } from './CameraScreen';
 
+// import { arraySum } from '../../model/httpsSendData';
 
-// const handleChoosePhoto = () => {
-//     const options = {}
-//     ImagePicker.launchImageLibrary(options, response => {
-//         console.log("Response", response);
-//     });
-// };
 
 const ProcessScreen = ({navigation}) => {
 
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
+
 
     const [image, setImage] = useState(null);
     const pickImage = async () => {
@@ -104,7 +101,32 @@ const ProcessScreen = ({navigation}) => {
                     bottom: 50,
                 }}
                 onPress= {() => {
-                    console.log("THIS IS WHERE WE SEND REQUESTS AND PROCESS");
+                    // make a file object from image uri using filreader
+                    const file = new File([image], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
+
+                    //encode the file object to base64
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        const base64 = reader.result;
+                        const s1 = base64.split(',')[1];    
+                        console.log(s1)
+
+                        // This is what we send to the backend
+                        const javaScriptObject = {
+                            "image": s1,
+                        }
+
+                        // arraysum(javaScriptObject);
+
+                    };
+                    reader.onerror = function (error) {
+                        console.log('Error: ', error);
+                    };
+
+                    
+
+
                     // navigation.navigate('HomeScreen');
                 }}>
 

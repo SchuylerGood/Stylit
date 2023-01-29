@@ -8,8 +8,14 @@ import requests
 from conversion_to_data_frame import *
 import os
 from PIL import Image
-
-
+import base64
+import firebase_admin
+from firebase_admin import credentials
+#from firebase_admin import storage
+from google.cloud import storage
+from google.oauth2.credentials import Credentials
+import google.auth.credentials
+import datetime
 
 
 def select_images(result):
@@ -35,14 +41,33 @@ def josnify(list): #converts list to json
     json_list = json.dumps(list) #converts list to json
     return json_list #returns json
 
-# Setup flask server
+def get_image():
+    img_data = 'ZmlsZTovLy92YXIvbW9iaWxlL0NvbnRhaW5lcnMvRGF0YS9BcHBsaWNhdGlvbi9BMTk3QzJFOC1BQTk2LTQ4NUYtOUU0OS1DMjc1NDk0MDg1QjQvTGlicmFyeS9DYWNoZXMvRXhwb25lbnRFeHBlcmllbmNlRGF0YS8lMjU0MGFub255bW91cyUyNTJGcGhvbmVBcHAtMzdhZjM1ZmQtYzY1ZS00ZDIwLWJiNzItYmE0ZDU0NGExZTI4L0ltYWdlUGlja2VyLzg1NTg5MkZBLTk3RTctNDc5NC1CMTEwLUE2QjBGMjYxODIzMS5qcGc='
+    image_data = base64.b64decode(img_data)
+    print(image_data)
+    with open("image.jpg", "wb") as f:
+        f.write(image_data)
+        print(f)
+        img = Image.open(image_data)
+        img.save('image.jpg', 'JPEG')
+        f.close()
+    
 
+cred = credentials.Certificate(r"C:\Users\qayse\OneDrive\Desktop\qhacks2023\model\fir-auth-5ed49-firebase-adminsdk-5nhpk-befb7469dc.json")
+# Fetch the service account key JSON file contents
 
-# Setup url route which will calculate
-# total sum of array.
+# Initialize the app with a service account, granting admin privileges
+app = firebase_admin.initialize_app(cred, {
+    'storageBucket': '<gs://fir-auth-5ed49.appspot.com>.appspot.com',
+}, name='storage')
 
-test_photo = 'test2.jpg'
-	
+buckets = storage.bucket(app="QHacks2023 Project")
+blob = buckets.blob("<gs://fir-auth-5ed49.appspot.com/tempImages/Image-name>")
+
+print(blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET'))
+#get_image()
+test_photo = 'image.jpg'
+#test_photo = r'C:\Users\qayse\OneDrive\Desktop\qhacks2023\model\test2.jpg'
 df = pd.DataFrame(columns = ['0','1','2','3','4','5','6','7','8','9','10','11',	'12',	'13',	'14',	'15',	'16','17',
                              '18',	'19',	'20',	'21',	'22',	'23',	'24','25',	'26',	'27',	'28',	'29',
                              '30',	'31',	'32',	'33',	'34',	'35',	'36',	'37',	'38',	'39',	'40',	'41',
@@ -68,8 +93,6 @@ image_list = select_images(result)
 json_list =josnify(image_list)
 print(json_list)
 output_data = {'photos': json_list}
-print(output_data)
 
-	# Data variable contains the
-	# data from the node server
-
+headers = {'content-type': 'application/json'}
+response = requests.post('http://localhost:3000/data', data=json.dumps(output_data), headers=headers)
