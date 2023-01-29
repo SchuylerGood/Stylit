@@ -1,44 +1,40 @@
-import BasicStyles from '../styles/BasicStyles';
+// import BasicStyles from '../styles/BasicStyles';
 import React, {Component, useState, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList, StyleSheet, SafeAreaView ,Platform, ScrollView, Dimensions, Animated, Easing, Button, TextInput} from 'react-native';
-import Video from 'react-native-video';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import LinearGradient from 'react-native-linear-gradient';
-import {Portal, Modal} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../Navbar';
+import HSCard from '../HSCard';
 
 const sampleImages = [
     {
         id: 1,
-        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
-        description: "Image 1",
-        uri: 'https://reactnativecode.com/wp-content/uploads/2017/05/react_thumb_install.png'
+        imagesrc: require('../images/HSImages/HS1.png'),
+        description: "Brown Curls",
     },
     {
         id: 2,
-        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
-        description: "Image 2"
+        imagesrc: require('../images/HSImages/HS2.png'),
+        description: "Dyed Slightly Curled"
     },
     {
         id: 3,
-        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
-        description: "Image 3"
+        imagesrc: require('../images/HSImages/HS3.png'),
+        description: "Wolf Cut"
     },
     {
         id: 4,
-        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
-        description: "Image 4"
+        imagesrc: require('../images/HSImages/HS4.png'),
+        description: "Textured Straight Black Hair"
     },
     {
         id: 5,
-        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
-        description: "Image 5"
+        imagesrc: require('../images/HSImages/HS5.png'),
+        description: "Short Curly Black Hair"
     },
     {
         id: 6,
-        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
-        description: "Image 6"
+        imagesrc: require('../images/HSImages/HS6.png'),
+        description: "Messy Curly Hair"
     }
 ]
 
@@ -52,14 +48,12 @@ const HomeScreen = ({ navigation }) => {
         }}>
             <SafeAreaView>
                 <ScrollView>
-                    {/* <Image source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}} style={{width: "100%"}}></Image> */}
-                    {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: "100%", height: 700}} /> */}
-                    <Image source={require("../images/HSImages/HS2.png")} style={{width: "100%", height: 700}}></Image>
-                    <Image source={require("../images/HSImages/HS3.png")} style={{width: "100%", height: 700}}></Image>
-                    <Image source={require("../images/HSImages/HS4.png")} style={{width: "100%", height: 700}}></Image>
-                    <Image source={require("../images/HSImages/HS5.png")} style={{width: "100%", height: 700}}></Image>
-                    <Image source={require("../images/HSImages/HS6.png")} style={{width: "100%", height: 700}}></Image>
-                    {/* <Icon style={{padding: 10}} name="camera" size={20} color="#fff" /> */}
+                    <HSCard image={sampleImages[0].imagesrc} desc={sampleImages[0].description}/>
+                    <HSCard image={sampleImages[1].imagesrc} desc={sampleImages[1].description}/>
+                    <HSCard image={sampleImages[2].imagesrc} desc={sampleImages[2].description}/>
+                    <HSCard image={sampleImages[3].imagesrc} desc={sampleImages[3].description}/>
+                    <HSCard image={sampleImages[4].imagesrc} desc={sampleImages[4].description}/>
+                    <HSCard image={sampleImages[5].imagesrc} desc={sampleImages[5].description}/>
                 </ScrollView>
             </SafeAreaView>
             <Navbar/>

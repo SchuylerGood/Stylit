@@ -26,7 +26,7 @@ def select_images(result):
         image_list = os.listdir('data/pics/oval')
         return image_list
     elif result == 'long':
-        image_list = os.listdir('data/pics/long')
+        image_list = os.listdir(r'C:\Users\dylan\Documents\GitHub\qhacks2023\model\data\pics\long')
         return image_list
     else:
         return []

@@ -1,22 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, TextInput, View, Image, Platform, Button, TouchableOpacity, Dimensions } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
-import { Camera, CameraType} from 'expo-camera';
-// import * as MediaLibrary from 'expo-media-library';
-import CameraButton from '../CameraButton';
 import * as ImagePicker from 'expo-image-picker';
 import { image } from './CameraScreen';
+import { auth } from '../../firebase';
+import firebase from 'firebase';
+import "firebase/storage";
 
-// import { arraySum } from '../../model/httpsSendData';
+// import { arraysum } from 'C:\Users\dylan\Documents\GitHub\qhacks2023\model\httpsSendData.js';
+
+function uploadBlob(file) {
+    const ref = firebase.storage().ref().child('some-child');
+    const task = ref.put(file);
+    task.on('state changed',(snapshot) => {
+      console.log('Uploaded a blob or file!');
+    }), (error) => {
+        console.log(error);
+    }, () => { 
+        console.log('Upload complete');
+    }
+  }
 
 
 const ProcessScreen = ({navigation}) => {
 
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
-
-
     const [image, setImage] = useState(null);
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    // const imageRef = storageRef.child(image);
+    // const task = imageRef.put(image);
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -100,34 +114,36 @@ const ProcessScreen = ({navigation}) => {
                     position: 'absolute',
                     bottom: 50,
                 }}
-                onPress= {() => {
-                    // make a file object from image uri using filreader
+                onPress= { async () => {
                     const file = new File([image], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
+                    uploadBlob(file);
 
-                    //encode the file object to base64
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = function () {
-                        const base64 = reader.result;
-                        const s1 = base64.split(',')[1];    
-                        console.log(s1)
+                    // const reader = new FileReader();
+                    // reader.readAsDataURL(file);
+                    // reader.onload = function () {
+                    //     const base64 = reader.result;
+                    //     const s1 = base64.split(',')[1];    
+                    //     // console.log(s1)
 
-                        // This is what we send to the backend
-                        const javaScriptObject = {
-                            "image": s1,
-                        }
+                    //     const javaScriptObject = {
+                    //         "image": s1,
+                    //     }
 
-                        // arraysum(javaScriptObject);
+                    // };
+                    // reader.onerror = function (error) {
+                    //     // console.log('Error: ', error);
+                    // };
 
-                    };
-                    reader.onerror = function (error) {
-                        console.log('Error: ', error);
-                    };
-
-                    
-
-
-                    // navigation.navigate('HomeScreen');
+                    // task.on('state_changed', (snapshot) => {
+                    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    //     // console.log('Upload is ' + progress + '% done');
+                    // }, (error) => {
+                    //     // console.log(error);
+                    // }, () => {
+                    //     task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    //     // console.log('File available at', downloadURL);
+                    // });
+                    // });
                 }}>
 
                 <Text style={{
