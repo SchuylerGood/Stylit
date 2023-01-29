@@ -44,7 +44,7 @@ def scale_rotate_translate(image, angle, center = None, new_center = None, scale
     return image.transform(image.size, Image.AFFINE, (a,b,c,d,e,f), resample=resample)
 def crop_face(image, eye_left=(0,0), eye_right=(0,0), offset_pct=(0.3,0.3), dest_sz = (600,600)):
     # calculate offsets in original image
-    offset_h = math.floor(float(offset_pct[0])*dest_sz[0])
+    offset_h = math.floor(float(offset_pct[0])*dest_sz[0]) 
     offset_v = math.floor(float(offset_pct[1])*dest_sz[1])
     # get the direction
     eye_direction = (eye_right[0] - eye_left[0], eye_right[1] - eye_left[1])
