@@ -117,6 +117,39 @@ const ProcessScreen = ({navigation}) => {
                 onPress= { async () => {
                     const file = new File([image], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
                     uploadBlob(file);
+                    var request = require('request-promise');
+                    async function arraysum() {
+                        var data = {
+                            "image": file
+                        }
+                        var options = {
+                            method: 'POST',
+                    
+                            // http:flaskserverurl:port/route
+                            uri: 'http://127.0.0.1:5000/arraysum',
+                            body: data,
+                    
+                            // Automatically stringifies
+                            // the body to JSON
+                            json: true
+                        };
+                        var sendrequest = await request(options)
+                        .then(function (parsedBody) {
+                            console.log(parsedBody);
+                            
+                            // You can do something with
+                            // returned data
+                            let result;
+                            result = parsedBody['result'];
+                            console.log("Sum of Array from Python: ", result);
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                    }
+                    arraysum();
+
+                    
 
                     // const reader = new FileReader();
                     // reader.readAsDataURL(file);
