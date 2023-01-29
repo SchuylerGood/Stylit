@@ -1,11 +1,7 @@
 import BasicStyles from '../styles/BasicStyles';
 import React, {Component, useState, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList, StyleSheet, SafeAreaView ,Platform, ScrollView, Dimensions, Animated, Easing, Button, TextInput} from 'react-native';
-import Video from 'react-native-video';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import LinearGradient from 'react-native-linear-gradient';
-import {Portal, Modal} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../Navbar';
 
 const sampleImages = [

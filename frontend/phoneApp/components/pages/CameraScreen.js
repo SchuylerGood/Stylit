@@ -6,6 +6,7 @@ import * as MediaLibrary from 'expo-media-library';
 import CameraButton from '../CameraButton';
 import Navbar from '../Navbar';
 
+
 const CameraScreen = ({ navigation }) => {
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [image, setImage] = useState(null);
@@ -27,7 +28,7 @@ const CameraScreen = ({ navigation }) => {
         if(cameraRef) {
             try{
                 const data = await cameraRef.current.takePictureAsync();
-                console.log(data);
+                // console.log(data);
                 setImage(data.uri);
             } catch(e) {
                 console.log(e);
@@ -47,6 +48,7 @@ const CameraScreen = ({ navigation }) => {
         }
 
     }
+    
 
     if(hasCameraPermission === false) {
         return <Text>The app does not have access to the camera, please navigate to settings and enable camera permissions to have access to this feature</Text>

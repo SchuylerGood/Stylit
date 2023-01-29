@@ -5,21 +5,35 @@ import { Camera, CameraType} from 'expo-camera';
 // import * as MediaLibrary from 'expo-media-library';
 import CameraButton from '../CameraButton';
 import * as ImagePicker from 'expo-image-picker';
+import { image } from './CameraScreen';
+import { auth } from '../../firebase';
+import firebase from 'firebase';
+import "firebase/storage";
 
+// import { arraysum } from 'C:\Users\dylan\Documents\GitHub\qhacks2023\model\httpsSendData.js';
 
-// const handleChoosePhoto = () => {
-//     const options = {}
-//     ImagePicker.launchImageLibrary(options, response => {
-//         console.log("Response", response);
-//     });
-// };
+function uploadBlob(file) {
+    const ref = firebase.storage().ref().child('some-child');
+    const task = ref.put(file);
+    task.on('state changed',(snapshot) => {
+      console.log('Uploaded a blob or file!');
+    }), (error) => {
+        console.log(error);
+    }, () => { 
+        console.log('Upload complete');
+    }
+  }
+
 
 const ProcessScreen = ({navigation}) => {
 
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
-
     const [image, setImage] = useState(null);
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    // const imageRef = storageRef.child(image);
+    // const task = imageRef.put(image);
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -103,9 +117,36 @@ const ProcessScreen = ({navigation}) => {
                     position: 'absolute',
                     bottom: 50,
                 }}
-                onPress= {() => {
-                    console.log("THIS IS WHERE WE SEND REQUESTS AND PROCESS");
-                    // navigation.navigate('HomeScreen');
+                onPress= { async () => {
+                    const file = new File([image], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
+                    uploadBlob(file);
+
+                    // const reader = new FileReader();
+                    // reader.readAsDataURL(file);
+                    // reader.onload = function () {
+                    //     const base64 = reader.result;
+                    //     const s1 = base64.split(',')[1];    
+                    //     // console.log(s1)
+
+                    //     const javaScriptObject = {
+                    //         "image": s1,
+                    //     }
+
+                    // };
+                    // reader.onerror = function (error) {
+                    //     // console.log('Error: ', error);
+                    // };
+
+                    // task.on('state_changed', (snapshot) => {
+                    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    //     // console.log('Upload is ' + progress + '% done');
+                    // }, (error) => {
+                    //     // console.log(error);
+                    // }, () => {
+                    //     task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    //     // console.log('File available at', downloadURL);
+                    // });
+                    // });
                 }}>
 
                 <Text style={{

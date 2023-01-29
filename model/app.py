@@ -22,7 +22,7 @@ def select_images(result):
         image_list = os.listdir('data/pics/oval')
         return image_list
     elif result == 'long':
-        image_list = os.listdir('data/pics/long')
+        image_list = os.listdir(r'C:\Users\dylan\Documents\GitHub\qhacks2023\model\data\pics\long')
         return image_list
     else:
         return []
@@ -40,7 +40,7 @@ app = Flask(__name__)
 def sum_of_array():
 	data = request.get_json()
 	print(data)
-	test_photo = 'test2.jpg'
+	test_photo = r'C:\Users\dylan\Documents\GitHub\qhacks2023\model\test2.jpg'
 	
 	df = pd.DataFrame(columns = ['0','1','2','3','4','5','6','7','8','9','10','11',	'12',	'13',	'14',	'15',	'16','17',
                              '18',	'19',	'20',	'21',	'22',	'23',	'24','25',	'26',	'27',	'28',	'29',
@@ -61,7 +61,7 @@ def sum_of_array():
 	style_df = pd.DataFrame(columns = ['face_shape','hair_length','location','filename','score'])
 	make_face_df_save(test_photo,2035,df)
 
-	loaded_model = pickle.load(open('mlp_model.sav', 'rb'))
+	loaded_model = pickle.load(open(r'C:\Users\dylan\Documents\GitHub\qhacks2023\model\mlp_model.sav', 'rb'))
 	result = loaded_model.predict(df)
 	image_list = select_images(result)
 	json_list =josnify(image_list)
