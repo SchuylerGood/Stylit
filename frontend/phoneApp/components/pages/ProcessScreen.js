@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, TextInput, View, Image, Platform, Button, TouchableOpacity, Dimensions } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
-import { Camera, CameraType} from 'expo-camera';
-// import * as MediaLibrary from 'expo-media-library';
-import CameraButton from '../CameraButton';
 import * as ImagePicker from 'expo-image-picker';
 import { image } from './CameraScreen';
 import { auth } from '../../firebase';
