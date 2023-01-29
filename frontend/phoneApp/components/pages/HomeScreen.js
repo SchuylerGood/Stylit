@@ -1,56 +1,68 @@
-import { StyleSheet, Text, TextInput, View, Image,  Button, TouchableOpacity } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
-// import { ScrollView } from 'react-native-gesture-handler';
+import React, {Component, useState, useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity, FlatList, StyleSheet, SafeAreaView ,Platform, ScrollView, Dimensions, Animated, Easing, Button, TextInput} from 'react-native';
+import Video from 'react-native-video';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import LinearGradient from 'react-native-linear-gradient';
+import {Portal, Modal} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Navbar from '../Navbar';
+
+const sampleImages = [
+    {
+        id: 1,
+        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
+        description: "Image 1",
+        uri: 'https://reactnativecode.com/wp-content/uploads/2017/05/react_thumb_install.png'
+    },
+    {
+        id: 2,
+        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
+        description: "Image 2"
+    },
+    {
+        id: 3,
+        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
+        description: "Image 3"
+    },
+    {
+        id: 4,
+        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
+        description: "Image 4"
+    },
+    {
+        id: 5,
+        imagesrc: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=michael-dam-mEZ3PoFGs_k-unsplash.jpg&w=640',
+        description: "Image 5"
+    },
+    {
+        id: 6,
+        imagesrc: 'https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=minh-pham-5yENNRbbat4-unsplash.jpg&w=640',
+        description: "Image 6"
+    }
+]
 
 const HomeScreen = ({ navigation }) => {
-    return (
-        // THIS SHOULD BE WHERE THE INFINITY SCROLL OF POSTS GOES
+    return (        
         <View style={{
             flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             backgroundColor: '#fff'
         }}>
-            <View style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-                backgroundColor: '#fff'
-            }}>
-                <Text style={{
-                    color: '#8E8E8E',
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    marginHorizontal: 100,
-                    textAlign: 'center',
-                }}>
-                    This is where the infinite scroll demo will go 
-                </Text>
-            </View>
-            <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    padding: 20,
-                    backgroundColor: '#2A4ED0'
-            }}>
-                <TouchableOpacity onPress={() => navigation.navigate('SavedScreen')}>
-                    <Image source={require("../images/files.png")} ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ShareScreen')}>
-                    <Image source={require("../images/telegram.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')} >
-                    <Image source={require("../images/home.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
-                    <Image source={require("../images/camera.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
-                    <Image source={require("../images/notes.png")}></Image>
-                </TouchableOpacity>
-            </View>
+            <SafeAreaView>
+                <ScrollView>
+                    {/* <Image source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}} style={{width: "100%"}}></Image> */}
+                    {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={{width: "100%", height: 700}} /> */}
+                    <Image source={require("../images/HSImages/HS2.png")} style={{width: "100%", height: 700}}></Image>
+                    <Image source={require("../images/HSImages/HS3.png")} style={{width: "100%", height: 700}}></Image>
+                    <Image source={require("../images/HSImages/HS4.png")} style={{width: "100%", height: 700}}></Image>
+                    <Image source={require("../images/HSImages/HS5.png")} style={{width: "100%", height: 700}}></Image>
+                    <Image source={require("../images/HSImages/HS6.png")} style={{width: "100%", height: 700}}></Image>
+                    {/* <Icon style={{padding: 10}} name="camera" size={20} color="#fff" /> */}
+                </ScrollView>
+            </SafeAreaView>
+            <Navbar/>
         </View>
     )
 }

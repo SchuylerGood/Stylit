@@ -14,6 +14,7 @@ import SavedScreen from './components/pages/SavedScreen';
 import ShareScreen from './components/pages/ShareScreen';
 import HomeScreen from './components/pages/HomeScreen';
 import CameraScreen from './components/pages/CameraScreen';
+  import ProcessScreen from './components/pages/ProcessScreen';
 import OptionsScreen from './components/pages/OptionsScreen';
 
 
@@ -36,12 +37,15 @@ export default function App() {
         <Stack.Screen name="CreateAccountScreen" component={CreateAccountScreen} />
         <Stack.Screen name="PasswordSetupScreen" component={PasswordSetupScreen} />
 
+
         {/* THIS IS THE MAIN CONTENT SCREENS */}
         <Stack.Screen name="SavedScreen"   component={SavedScreen} options={{headerBackVisible:false}}/>
         <Stack.Screen name="ShareScreen"   component={ShareScreen} options={{headerBackVisible:false}}/>
         <Stack.Screen name="HomeScreen"    component={HomeScreen} options={{headerBackVisible:false}} />
-        <Stack.Screen name="CameraScreen"  component={CameraScreen} options={{headerBackVisible:false}}/>
+        <Stack.Screen name="CameraScreen"  component={CameraScreen}/>
+          <Stack.Screen name="ProcessScreen" component={ProcessScreen}/>
         <Stack.Screen name="OptionsScreen" component={OptionsScreen} />
+
 
         {/* THIS IS THE PROFILE MANAGEMENT SECTION */}
         <Stack.Screen name="ProfileScreen"   component={ProfileScreen} />
@@ -49,10 +53,8 @@ export default function App() {
         <Stack.Screen name="PrivacyPolicies" component={PrivacyPolicies} />
         <Stack.Screen name="ReportAProblem"  component={ReportAProblem} />
         <Stack.Screen name="Help"            component={Help} />
-
       </Stack.Navigator>
     </NavigationContainer>
-    
   );
 }
 

@@ -107,6 +107,21 @@ const BasicStyles = StyleSheet.create({
         borderRadius: 30,
         marginBottom: 20,
         marginHorizontal: 50,
+
+    },
+    takePhotoButton: {
+        backgroundColor: '#6E80E1',
+        height: 70,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        borderRadius: 30,
+        marginBottom: 20,
+        marginHorizontal: '15%',
+        position: 'absolute',
+        bottom: 20,
+        width: '70%',
     },
     smallButton: {
         color: '#fff',

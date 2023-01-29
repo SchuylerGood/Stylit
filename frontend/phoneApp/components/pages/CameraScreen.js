@@ -4,6 +4,7 @@ import BasicStyles from '../styles/BasicStyles';
 import { Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import CameraButton from '../CameraButton';
+import Navbar from '../Navbar';
 
 const CameraScreen = ({ navigation }) => {
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -44,6 +45,7 @@ const CameraScreen = ({ navigation }) => {
                 console.log(e);
             }
         }
+
     }
 
     if(hasCameraPermission === false) {
@@ -102,7 +104,14 @@ const CameraScreen = ({ navigation }) => {
                                     Camera.Constants.FlashMode.off)
                                 }}/>
                             </View>
-                            <CameraButton title={'Take a picture'} icon='camera' color={'#fff'} onPress={takePicture} styleType={BasicStyles.buttonButton}/>
+                            <View style={{
+                                flex: 1,
+                                justifyContent: 'flex-end',
+                                alignContent: 'center',
+                                width: '100%',
+                            }}>
+                                <CameraButton title={'Take a picture'} icon='camera' color={'#fff'} onPress={takePicture} styleType={BasicStyles.takePhotoButton}/>
+                            </View>
                         </View>
                     </Camera>
                 // Else if the image is taken, show the image
@@ -123,37 +132,17 @@ const CameraScreen = ({ navigation }) => {
                                 <CameraButton title={'Retake'} icon='retweet' color={'#fff'} styleType={BasicStyles.smallButton}
                                     onPress={() => setImage(null)}
                                 />
+                                {/* THIS IS THE SAVE BUTTOn */}
                                 <CameraButton title={'Save'} icon='check' color={'#fff'} styleType={BasicStyles.smallButton}
-                                    onPress={saveImage}
+                                    onPress={() => {
+                                        saveImage();
+                                        navigation.navigate('ProcessScreen')
+                                    }}
                                 />
                             </View>
                         </View>
                     </View>
                 }
-            </View>
-
-            <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    padding: 20,
-                    backgroundColor: '#2A4ED0'
-            }}>
-                <TouchableOpacity onPress={() => navigation.navigate('SavedScreen')}>
-                    <Image source={require("../images/files.png")} ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ShareScreen')}>
-                    <Image source={require("../images/telegram.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')} >
-                    <Image source={require("../images/home.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
-                    <Image source={require("../images/camera.png")}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
-                    <Image source={require("../images/notes.png")}></Image>
-                </TouchableOpacity>
             </View>
         </View>
     )
