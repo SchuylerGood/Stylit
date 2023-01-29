@@ -1,7 +1,17 @@
 import { StyleSheet, Text, TextInput, View, Image,  Button, TouchableOpacity } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { auth } from '../../firebase';
 
+
+function logOut(navigation){
+    auth.signOut().then(() => {
+        console.log("User signed out");
+    }).catch((error) => {
+        console.log(error);
+    });
+    navigation.navigate('LogInScreen')
+}
 
 const OptionsScreen = ({ navigation }) => {
     return (
@@ -47,6 +57,10 @@ const OptionsScreen = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicies')} style={BasicStyles.profileSection}><Text>Privacy Policies</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('ReportAProblem')} style={BasicStyles.profileSection}><Text>Report a problem</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Help')} style={BasicStyles.profileSection}><Text>Help</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => {logOut(navigation)}} style={BasicStyles.profileSection}>
+                    <Text>Log Out</Text>
+
+                </TouchableOpacity>
             </View>
         </View>
     )

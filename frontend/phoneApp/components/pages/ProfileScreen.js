@@ -20,8 +20,10 @@ const OptionsScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            
             <View style={BasicStyles.profileSection}>
-                <TouchableOpacity><Text style={{color: "#000"}}>First Name: Aidan</Text>
+                <TouchableOpacity>
+                    <Text style={{color: "#000"}}>First Name: Aidan</Text>
                 </TouchableOpacity>
             </View>
             <View style={BasicStyles.profileSection}>
