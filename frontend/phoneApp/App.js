@@ -25,6 +25,8 @@ import PrivacyPolicies from './components/pages/PrivacyPoliciesScreen';
 import ReportAProblem from './components/pages/ReportAProblemScreen';
 import Help from './components/pages/HelpScreen';
 
+// import firebaseConfig from './firebaseConfig';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
