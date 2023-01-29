@@ -28,7 +28,6 @@ const CameraScreen = ({ navigation }) => {
         if(cameraRef) {
             try{
                 const data = await cameraRef.current.takePictureAsync();
-                // console.log(data);
                 setImage(data.uri);
             } catch(e) {
                 console.log(e);
@@ -41,6 +40,12 @@ const CameraScreen = ({ navigation }) => {
             try{
                 await MediaLibrary.createAssetAsync(image);
                 alert("Image saved")
+                uploadImage(result.assets[0].uri, "Image-name").then(() => {
+                    Alert.alert("Success!");
+                })
+                .catch((error) => {
+                    Alert.alert(error);
+                })
                 setImage(null);
             } catch(e) {
                 console.log(e);
@@ -52,6 +57,14 @@ const CameraScreen = ({ navigation }) => {
 
     if(hasCameraPermission === false) {
         return <Text>The app does not have access to the camera, please navigate to settings and enable camera permissions to have access to this feature</Text>
+    }
+
+    uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+
+        var ref = firebase.storage().ref().child("tempImages/" + imageName);
+        return ref.put(blob);
     }
 
     return (

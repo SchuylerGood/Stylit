@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, TextInput, View, Image, Platform, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Alert, Image, Platform, Button, TouchableOpacity, Dimensions } from 'react-native';
 import BasicStyles from '../styles/BasicStyles';
 import * as ImagePicker from 'expo-image-picker';
 import { image } from './CameraScreen';
 import { auth } from '../../firebase';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 import "firebase/storage";
 
 // import { arraysum } from 'C:\Users\dylan\Documents\GitHub\qhacks2023\model\httpsSendData.js';
+  
 
 function uploadBlob(file) {
     const ref = firebase.storage().ref().child('some-child');
@@ -31,6 +32,11 @@ const ProcessScreen = ({navigation}) => {
     const storageRef = storage.ref();
     // const imageRef = storageRef.child(image);
     // const task = imageRef.put(image);
+
+    const [files, setFiles] = useState([]);
+
+
+
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -39,15 +45,27 @@ const ProcessScreen = ({navigation}) => {
           aspect: [4, 3],
           quality: 1,
         });
-
-        console.log(result);
+    
+        // console.log(result);
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
-          }
-        };
+            uploadImage(result.assets[0].uri, "Image-name").then(() => {
+                Alert.alert("Success!");
+            })
+            .catch((error) => {
+                Alert.alert(error);
+            })
+        }
+    };
     
+        uploadImage = async (uri, imageName) => {
+            const response = await fetch(uri);
+            const blob = await response.blob();
 
+            var ref = firebase.storage().ref().child("tempImages/" + imageName);
+            return ref.put(blob);
+        }
     return(
         <View style={{
             flex: 1,
@@ -115,7 +133,7 @@ const ProcessScreen = ({navigation}) => {
                     bottom: 50,
                 }}
                 onPress= { async () => {
-                    const file = new File([image], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
+                    const file = new File([image.uri], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
                     uploadBlob(file);
                     var request = require('request-promise');
                     async function arraysum() {
