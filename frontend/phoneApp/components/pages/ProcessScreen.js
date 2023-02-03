@@ -6,9 +6,43 @@ import { image } from './CameraScreen';
 import { auth } from '../../firebase';
 import * as firebase from 'firebase';
 import "firebase/storage";
+import axios from 'axios';
+
+
 
 // import { arraysum } from 'C:\Users\dylan\Documents\GitHub\qhacks2023\model\httpsSendData.js';
   
+
+// async function uploadImageAsync(uri) {
+//     const blob = await new Promise((resolve, reject) => {
+//         const xhr = new XMLHttpRequest();
+//         xhr.onload = function() {
+//             resolve(xhr.response);
+//         };
+//         xhr.onerror = function(e) {
+//             console.log(e);
+//             reject(new TypeError('Network request failed'));
+//         };
+//         xhr.responseType = 'blob';
+//         xhr.open('POST', uri, true);
+//         xhr.send(null);
+//     });
+// }
+    
+// create an async post request function to upload an image to the server without using firebase
+async function uploadImageAsync(uri) {
+    axios.post('http://127.0.0.1:5000/arraysum', {
+        image: image
+    }).then((response) => {
+        console.log(response)
+    }).catch((error) => {
+        console.log(error)
+    })
+}
+
+    
+
+
 
 function uploadBlob(file) {
     const ref = firebase.storage().ref().child('some-child');
@@ -132,70 +166,7 @@ const ProcessScreen = ({navigation}) => {
                     position: 'absolute',
                     bottom: 50,
                 }}
-                onPress= { async () => {
-                    const file = new File([image.uri], "image.jpg", {type: "image/jpeg", lastModified: Date.now()});
-                    uploadBlob(file);
-                    var request = require('request-promise');
-                    async function arraysum() {
-                        var data = {
-                            "image": file
-                        }
-                        var options = {
-                            method: 'POST',
-                    
-                            // http:flaskserverurl:port/route
-                            uri: 'http://127.0.0.1:5000/arraysum',
-                            body: data,
-                    
-                            // Automatically stringifies
-                            // the body to JSON
-                            json: true
-                        };
-                        var sendrequest = await request(options)
-                        .then(function (parsedBody) {
-                            console.log(parsedBody);
-                            
-                            // You can do something with
-                            // returned data
-                            let result;
-                            result = parsedBody['result'];
-                            console.log("Sum of Array from Python: ", result);
-                        })
-                        .catch(function (err) {
-                            console.log(err);
-                        });
-                    }
-                    arraysum();
-
-                    
-
-                    // const reader = new FileReader();
-                    // reader.readAsDataURL(file);
-                    // reader.onload = function () {
-                    //     const base64 = reader.result;
-                    //     const s1 = base64.split(',')[1];    
-                    //     // console.log(s1)
-
-                    //     const javaScriptObject = {
-                    //         "image": s1,
-                    //     }
-
-                    // };
-                    // reader.onerror = function (error) {
-                    //     // console.log('Error: ', error);
-                    // };
-
-                    // task.on('state_changed', (snapshot) => {
-                    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    //     // console.log('Upload is ' + progress + '% done');
-                    // }, (error) => {
-                    //     // console.log(error);
-                    // }, () => {
-                    //     task.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                    //     // console.log('File available at', downloadURL);
-                    // });
-                    // });
-                }}>
+                onPress={() => {uploadImageAsync("http://127.0.0.1:5000/arraysum")}}>
 
                 <Text style={{
                     color: '#fff',
