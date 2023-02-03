@@ -9,14 +9,8 @@ from conversion_to_data_frame import *
 import os
 from PIL import Image
 import base64
-import firebase_admin
-from firebase_admin import credentials
-#from firebase_admin import storage
-from google.cloud import storage
-from google.oauth2.credentials import Credentials
-import google.auth.credentials
-import datetime
-
+from firebase_admin import credentials, initialize_app
+from api import create_app
 
 def select_images(result):
     if result == 'heart':
@@ -53,18 +47,9 @@ def get_image():
         f.close()
     
 
-cred = credentials.Certificate(r"C:\Users\qayse\OneDrive\Desktop\qhacks2023\model\fir-auth-5ed49-firebase-adminsdk-5nhpk-befb7469dc.json")
-# Fetch the service account key JSON file contents
+app = create_app()
+app.run(debug=True)
 
-# Initialize the app with a service account, granting admin privileges
-app = firebase_admin.initialize_app(cred, {
-    'storageBucket': '<gs://fir-auth-5ed49.appspot.com>.appspot.com',
-}, name='storage')
-
-buckets = storage.bucket(app="QHacks2023 Project")
-blob = buckets.blob("<gs://fir-auth-5ed49.appspot.com/tempImages/Image-name>")
-
-print(blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET'))
 #get_image()
 test_photo = 'image.jpg'
 #test_photo = r'C:\Users\qayse\OneDrive\Desktop\qhacks2023\model\test2.jpg'
