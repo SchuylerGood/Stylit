@@ -1,7 +1,9 @@
 # Stylit 
+![Stylit Logo](https://schuylergood.com/static/media/Stylit.a20f533de9085cfb9444.png)
 
-## Summary
-Stylit is a react native application, where a user can scan or upload a photo of their face and get a recommendation of a hairstyle that would suit them. The app also allows the user to save their favorite hairstyles and view them later. It uses artificial inteligence and facial recognition to determine the user's face shape and hair type. We then compare the users vecotr data to a database of 15,000 hairstyles and recommend the best hairstyle for the user, based off of their face shape. 
+## Project Description
+Stylit is a React Native application designed to provide hairstyle recommendations to users based on their facial features. By utilizing artificial intelligence and facial recognition technologies, Stylit analyzes a user's face shape and hair type to suggest hairstyles from a database of over 15,000 options. Users can also save their favorite hairstyles for future reference.
+
 
 ## Technologies Used
 - React Native
@@ -14,7 +16,33 @@ Stylit is a react native application, where a user can scan or upload a photo of
 - Google Firebase
 - Deep and Machine Learning
 
-We created this app as a part of the QHACKS 2023 Hackathon at Queen's University.
+This project was developed as part of the QHACKS 2023 Hackathon at Queen's University.
 
-## How to run
-Right now we have a backend setup on Heroku, so you can run the app on your phone by downloading the Expo app and scanning the QR code on the [Expo website](https://expo.io/@joshuamcclure/projects/stylit).
+## Installation and Running
+1. Clone the repository
+2. Navigate to project directory
+```
+cd Stylit
+```
+3. Install dependencies
+```
+npm install
+```
+4. Start the Expo server:
+```
+npm start
+```
+5. Use the Expo app to scan the QR code or run on an emulator to view the application.
+
+## How to use
+1. Launch the Stylit app on your device.
+2. Either scan a photo of your face or upload one from your device.
+3. Wait for Stylit to analyze your facial features and hair type.
+4. Receive hairstyle recommendations based on your face shape.
+5. Save your favorite hairstyles for future reference.
+
+## Contributors
+- Schuyler Good
+- Dylan Walker
+- Qays Ebrahim
+- Akshay Desale
